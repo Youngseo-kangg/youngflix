@@ -1,8 +1,11 @@
 import React from 'react'
 import axios from "axios"
-import Movie from "./Movie"
-import MovieSlide from "./MovieSlide"
-import"./App.css"
+import Home from "./Home/Home"
+import MoviesList from "./MoviesList/MoviesList"
+import Login from "./Login/Login"
+
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom"
+import "./App.css"
 
 class App extends React.Component{
   state = {
@@ -18,24 +21,47 @@ class App extends React.Component{
   }
   render(){
     const { isLoading, movies } = this.state
+    console.log(movies) // 이상하다 왜 데이터를 못받아오지?...
+
     return (
-      <section className="container">
-        <h1>Youngflix</h1>
-        {isLoading ?
-        <div className="loader">
-          <span className="loader__text">Loading...</span>
-        </div>
-        : 
-        <div className="youngflix_movie">
-          <MovieSlide movies={movies.slice(0,5)}/>
-          <h2>이번주의 영화 추천</h2>
-          <div className="movie__list">
-            {movies.map((movie)=>{
-              return <Movie key={movie.id} id={movie.id} year={movie.year} title={movie.title} summary={movie.summary} poster={movie.medium_cover_image} genres={movie.genres} />
-            })}
-          </div>
-        </div>}
-      </section>
+      <main>
+        {isLoading?
+        "loading... " :
+        <BrowserRouter>
+          <ul className="navbar">
+            <h1>Youngflix</h1>
+            <li><Link to="/" className="navbarItem">Home</Link></li>
+            <li><Link to="/Movies" className="navbarItem">Movies</Link></li>
+            <li><Link to="/Login" className="navbarItem">Login</Link></li>
+          </ul>
+          <Switch>
+            <Route exact path="/">
+              <div className="youngflix_container">
+                <Home movies={movies}/>
+              </div>
+            </Route>
+            <Route exact path="/Movies">
+              <MoviesList movies={movies}/>
+            </Route>
+            <Route exact path="/Login">
+              <Login />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+        }
+      </main>
+      
+      // <section className="container">
+      //   <Nav />
+      //   {isLoading ?
+      //   <div className="loader">
+      //     <span className="loader__text">Loading...</span>
+      //   </div>
+      //   : 
+      //   <div className="youngflix_container">
+      //     <Home movies={movies} />
+      //   </div>}
+      // </section>
     )
   }
 }

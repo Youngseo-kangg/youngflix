@@ -1,6 +1,38 @@
 *{
     margin:0;
     padding:0;
+    box-sizing: border-box;
+    background-color:#000;
+}
+.navbar{
+    width:1080px;
+    margin:auto;
+    list-style:none;
+    display:flex;
+    padding:15px 0px;
+    color:#fff;
+}
+.navbar h1{
+    color:#fff;
+    flex:3 1 auto;
+    transition: color 0.3s;
+}
+.navbar h1:hover{
+    color:red;
+}
+.navbarItem{
+    text-decoration: none;
+    font-size:2rem;
+    text-align:center;
+    flex:1 1 auto;
+    color:#fff;
+    margin:0px 10px;
+    border-bottom:2px solid transparent;
+    transition:all 0.3s;
+}
+.navbarItem:hover{
+    color:red;
+    border-bottom:2px solid red;
 }
 .container{
     width:100%;

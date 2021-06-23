@@ -1,34 +1,51 @@
-import { render } from "@testing-library/react"
 import React, {useState} from "react"
 import styled from "styled-components"
+import ReactPlayer from "react-player"
 
 const MovieSlideDiv = styled.div`
-    width:100%;
-    height:50%;
+    width:1080px;
+    margin:auto;
     .movieSlideContainer{
-        width:100%;
-        height:50%;
+        margin:auto;
+        width:auto;
+        height:500px;
         display:flex;
+        position:relative;
         overflow:hidden;
-        .movieData{
+        &img{
+            width:100%;
+            height:100%;
+        }
+        .movieDataContainer{
+            background-color:transparent;
+            position:absolute;
+            bottom:0;
             color:#fff;
-            vertical-align:bottom;
+            &h3 {
+                background-color:transparent;
+            }
         }
     }
 `
+
+const MovieData = styled.div`
+    background-image:url(${props => props.backgroundimage});
+    width:70%;
+`
 const Button = styled.button`
     all: unset;
-    background-color: coral;
+    background-color: red;
     padding: 0.5em 2em;
     color: #fff;
     border-radius: 10px;
     position:relative;
     top:320px;
+    border: 2px solid transparent;
     &:hover {
         transition: all 0.3s ease-in-out;
         background-color:#fff;
-        border: 1px solid coral;
-        color: coral;
+        border: 2px solid red;
+        color: red;
     }
     &.before{
         position:absolute;
@@ -39,10 +56,7 @@ const Button = styled.button`
         right:0
     }
 `;
-const MovieSlideImg = styled.img`
-    width:50%;
-    height:50%;
-`
+
 
 function MovieSlide({movies}){
     const [movieId, setMovieId] = useState(0)
@@ -68,20 +82,24 @@ function MovieSlide({movies}){
     }
 
     return(
-        <MovieSlideDiv >
+        <MovieSlideDiv image={movies[movieId].background_image}>
             <div className="move">
                 <Button className="before" onClick={beforeSlide}>&lt;</Button>
                 <Button className="after" onClick={afterSlide}>&gt;</Button>
             </div>
 
             <div className="movieSlideContainer">
-                <MovieSlideImg src={movies[movieId].large_cover_image}/>
-                <div className="movieData">
-                    <h3>{movies[movieId].title}</h3>
-                    <h4>{movies[movieId].rating}</h4>
-                    <p>{movies[movieId].summary}</p>
-                    <button>See More</button>
-                </div>
+                <img src={movies[movieId].medium_cover_image}/>
+                <MovieData backgroundimage={movies[movieId].background_image}>
+                    <ReactPlayer url={`https://youtu.be/`+movies[movieId].yt_trailer_code} />
+
+                    <div className="movieDataContainer">
+                        <h3>{movies[movieId].title}</h3>
+                        <h4>{movies[movieId].rating}</h4>
+                        <p>{movies[movieId].summary}</p>
+                        <button>See More</button>
+                    </div>
+                </MovieData>
             </div>
         </MovieSlideDiv>
     )

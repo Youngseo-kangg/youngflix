@@ -21,7 +21,7 @@ const MovieItem = styled.div`
     }
 `
 
-function Movie ({year, title, summary, poster, genres}){
+function MovieItems ({year, title, summary, poster, genres}){
     // img onclick -> module 창에 포스터 이미지 + 정보 다 뜨고 싶음
     // img hover -> img 크게 나타나기
     return (
@@ -41,7 +41,7 @@ function Movie ({year, title, summary, poster, genres}){
     )
 }
 
-Movie.propTypes = {
+MovieItems.propTypes = {
     id: PropTypes.number.isRequired,
     year: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -50,4 +50,4 @@ Movie.propTypes = {
     genres: PropTypes.arrayOf(PropTypes.string).isRequired
 }
 
-export default Movie;
+export default MovieItems;
