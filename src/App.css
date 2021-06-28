@@ -36,12 +36,26 @@
 }
 .container{
     width:100%;
+    max-width:1080px;
     height:100%;
-    background-color:#000;
-    color:#fff;
 }
-.movie__list{
-    background:#000;
-    color:#fff;
+.youngflix_movie{
+    width:100%;
+    margin:auto;
+    max-width:1080px;
+}
+.youngflix_movie .moviesListSlide{
     display:flex;
+    flex-wrap:nowrap;
+    height:563px;
+    transition: all 0.3s;
+}
+.youngflix_movie .moviesList{
+    overflow:hidden;
+}
+.youngflix_moviesList_title{
+    color:#fff
+}
+.youngflix_movie .move{
+    display: block;
 }

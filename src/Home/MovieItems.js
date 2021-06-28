@@ -1,53 +1,57 @@
-import React from "react"
-import PropTypes from "prop-types"
-import styled from "styled-components"
+import React, {useState, useEffect} from "react"
+import "./MovieItems.css"
 
-const MovieItem = styled.div`
-    .movie__mainTitle{
-        text-align:center;
+function MovieItems({movies}){
+    const [slideIdx, setSlideIdx] = useState(1) // (1~18까지 괜찮음)
+    const moveLeft = () => {
+        if(slideIdx===0){
+            setSlideIdx(16)
+        } else {
+            setSlideIdx(slideIdx-1) 
+        }
+    }
+    const moveRight = () => {
+        if(slideIdx===16){
+            setSlideIdx(0)
+        } else {
+            setSlideIdx(slideIdx+1) 
+        }
+    }
+    const styleChange = () => {
+        let moviesListSlide = document.querySelector(".youngflix_movie .moviesListSlide")
+        console.log(moviesListSlide)
+        moviesListSlide.style.left = (-slideIdx * 270) + 'px'
     }
 
-    .movie__genre{
-        list-style:none;
-        padding:0;
-        margin:0;
-    }
-    .movie__genre__item{
-        display:inline-block;
-        border: 1px solid #fff;
-        padding: 3px;
-        margin-right:5px;
-        margin-bottom: 5px
-    }
-`
+    useEffect(()=>{
+        styleChange()
+    },[slideIdx])
 
-function MovieItems ({year, title, summary, poster, genres}){
-    // img onclick -> module 창에 포스터 이미지 + 정보 다 뜨고 싶음
-    // img hover -> img 크게 나타나기
-    return (
-        <MovieItem>
-            <img className="movie__poster" src={poster} alt={title} title={title}></img>
-            <div className="movie__data">
-                <h3 className="movie__title">{title}</h3>
-                <ul className="movie__genre">
-                    {genres.map((genre, index)=>{
-                        return <li key={index} className="movie__genre__item">{genre}</li>
-                    })}
-                </ul>
-                <h5 className="movie__year">{year}</h5>
-                <p className="movie__summary">{summary.slice(0,140)}...</p>
+    return(
+        <div className="moviesList">
+            <div className="move">
+                <button className="before" onClick={moveLeft}>&lt;</button>
+                <button className="after" onClick={moveRight}>&gt;</button>
             </div>
-        </MovieItem>
+
+            <div className="moviesListSlide">
+                {movies.map((movie)=>{
+                    return (
+                        <div className="moviesList__data">
+                            <img className="moviesList__poster" src={movie.medium_cover_image} alt={movie.title} title={movie.title}></img>
+                            <h3 className="moviesList__title">{movie.title}</h3>
+                            <h4 className="moviesList__year">{movie.year}</h4>
+                            <ul className="moviesList__genre">
+                                {movie.genres.map((genre, index)=>{
+                                    return <li key={index} className="moviesList__genre__item">{genre}</li>
+                                })}
+                            </ul>
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
     )
 }
 
-MovieItems.propTypes = {
-    id: PropTypes.number.isRequired,
-    year: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    summary: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    genres: PropTypes.arrayOf(PropTypes.string).isRequired
-}
-
-export default MovieItems;
+export default MovieItems

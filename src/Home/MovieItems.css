@@ -1,0 +1,68 @@
+.moviesListSlide{
+    display:flex;
+    position:relative;
+    flex-wrap:wrap;
+    width:100%;
+    max-width:1080px;
+    margin:auto;
+    background-color:#000;
+    color:#fff;
+}
+.moviesList__data{
+    color: #fff;
+    width:25%;
+    height:auto;
+    border:2px solid transparent;
+    text-align:center;
+    transition: all 0.4s;
+    padding:20px;
+}
+.moviesList__poster{
+    margin-bottom:20px
+}
+.moviesList__title{
+    margin-bottom:10px;
+}
+.moviesList__year{
+    margin-bottom:10px;
+}
+.moviesList__data:hover{
+    border:2px solid red;
+}
+.moviesList__genre{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+.moviesList__genre__item{
+    display:inline-block;
+    border: 1px solid #fff;
+    padding: 3px;
+    margin-right:5px;
+    margin-bottom: 5px
+}
+.move{
+    display:none;
+    position:absolute;
+    background-color:transparent;
+    width:1080px;
+    height:30px;
+    top:100%;
+    z-index:10;
+}
+.before{
+    position:absolute;
+    left:0;
+    color:#fff;
+    padding: 0.5em 2em;
+    border:1px solid white;
+    border-radius:1em;
+}
+.after{
+    position:absolute;
+    right:0;
+    color:#fff;
+    padding: 0.5em 2em;
+    border:1px solid white;
+    border-radius:1em;
+}

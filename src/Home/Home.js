@@ -5,13 +5,10 @@ import MovieSlide from "./MovieSlide"
 function Home({movies}){
     return (
         <div className="youngflix_movie">
-            <MovieSlide movies={movies.slice(0,5)}/>
-            <h2>이번주의 영화 추천</h2>
-            <div className="movie__list">
-                {movies.map((movie)=>{
-                    return <MovieItems key={movie.id} id={movie.id} year={movie.year} title={movie.title} summary={movie.summary} poster={movie.medium_cover_image} genres={movie.genres} />
-                })}
-            </div>
+            <MovieSlide movies={movies.slice(0,9)}/>
+
+            <h2 className="youngflix_moviesList_title">이번주의 영화 추천</h2>
+            <MovieItems key={movies.id} movies={movies}/>
         </div>
     )
 }

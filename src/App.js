@@ -3,6 +3,7 @@ import axios from "axios"
 import Home from "./Home/Home"
 import MoviesList from "./MoviesList/MoviesList"
 import Login from "./Login/Login"
+import LoadingIndicator from "./LoadingIndicator/LoadingIndicator"
 
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom"
 import "./App.css"
@@ -26,7 +27,8 @@ class App extends React.Component{
     return (
       <main>
         {isLoading?
-        "loading... " :
+        <LoadingIndicator />
+        :
         <BrowserRouter>
           <ul className="navbar">
             <h1>Youngflix</h1>
