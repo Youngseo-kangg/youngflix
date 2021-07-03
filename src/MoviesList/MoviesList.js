@@ -1,34 +1,18 @@
 import React, {useState} from "react"
-import LoadingIndicator from "../LoadingIndicator/LoadingIndicator"
+import MovieInfo from "./MovieInfo"
 import "./MoviesList.css"
 
 function MoviesList({movies}){
     const [movieState, setMovieState] = useState(false)
-    const [Moviedata, setMoviedata] = useState(movies[0])
+    const [moviedata, setMoviedata] = useState(movies[0])
     const movieStateChange = (index) => {
         setMoviedata(movies[index]) // moviedata 변경하기
         setMovieState(true) // movieState 변경해주기
     }
-    const exitMovieInfo = () => {
-        setMovieState(false)
-    }
     return(
-        <div>
+        <div className="movieContainer">
             {movieState?
-            <div className="movieInfo">
-                <img src={Moviedata.large_cover_image} alt={Moviedata.title} title={Moviedata.title}></img>
-                <div className="movieInfo__data">
-                    <h3>{Moviedata.title}</h3>
-                    <h4>{Moviedata.year}</h4>
-                    <ul className="moviesList__genre">
-                        {Moviedata.genres.map((genre, index)=>{
-                            return <li key={index} className="moviesList__genre__item">{genre}</li>
-                        })}
-                    </ul>
-                    <p>{Moviedata.description_full}</p>
-                </div>
-                <button onClick={exitMovieInfo}>close</button>
-            </div>
+            <MovieInfo moviedata={moviedata} setMovieState={setMovieState} />
             :
             <div className="moviesListSlide">
                 {movies.map((movie,index)=>{

@@ -50,6 +50,15 @@
     color:#fff;
     display:flex;
 }
+.movieInfoClose{
+    width:5rem;
+    height:5rem;
+    padding:1rem;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+    font-size:2rem;
+}
 .movieInfo__data{
     padding:25% 0%;
 }

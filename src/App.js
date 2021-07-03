@@ -10,19 +10,19 @@ import "./App.css"
 
 class App extends React.Component{
   state = {
-    isLoading:true,
-    movies : []
+    isLoading : true,
+    movies : [], 
   }
   getMovies = async () => {
     const {data : {data : {movies}}} = await axios.get("http://yts-proxy.nomadcoders1.now.sh/list_movies.json?sort_by=rating")
-    this.setState({ movies , isLoading:false })
+    this.setState({ movies , isLoading:false})
   }
   componentDidMount(){
     this.getMovies()
   }
+  
   render(){
     const { isLoading, movies } = this.state
-    console.log(movies) // 이상하다 왜 데이터를 못받아오지?...
 
     return (
       <main>
@@ -52,18 +52,6 @@ class App extends React.Component{
         </BrowserRouter>
         }
       </main>
-      
-      // <section className="container">
-      //   <Nav />
-      //   {isLoading ?
-      //   <div className="loader">
-      //     <span className="loader__text">Loading...</span>
-      //   </div>
-      //   : 
-      //   <div className="youngflix_container">
-      //     <Home movies={movies} />
-      //   </div>}
-      // </section>
     )
   }
 }

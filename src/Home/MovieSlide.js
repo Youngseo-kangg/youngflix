@@ -27,9 +27,15 @@ const MovieSlideDiv = styled.div`
             }
             &>h4,p{margin-bottom:10px}
             &>button{
-                border:1px solid #fff;
+                border:2px solid #fff;
                 padding:0.5rem 1rem;
                 color:#fff;
+                transition:all 0.2s;
+            } 
+            &>button:hover{
+                border:2px solid red;
+                color:red;
+                cursor:pointer;
             }
         }
     }
@@ -40,20 +46,21 @@ const MovieData = styled.div`
     width:70%;
 `
 
-function MovieSlide({movies}){
-    const randomNum = Math.floor(Math.random()*10)
-    const [idx,setIdx] = useState(randomNum)
-
+function MovieSlide({ movie, setShowMovieInfo, setMainMovieInfo }){
+    const findMeInfo = () => {
+        setShowMovieInfo(true)
+        setMainMovieInfo(movie)
+    }
     return(
         <MovieSlideDiv>
             <div className="movieSlideContainer">
-                <img src={movies[idx].medium_cover_image}/>
-                <MovieData backgroundimage={movies[idx].background_image}>
+                <img src={movie.medium_cover_image}/>
+                <MovieData backgroundimage={movie.background_image}>
                     <div className="movieDataContainer">
-                        <h3>{movies[idx].title}</h3>
-                        <h4>{movies[idx].rating}</h4>
-                        <p>{movies[idx].summary.slice(0,140)}...</p>
-                        <button>See More</button>
+                        <h3>{movie.title}</h3>
+                        <h4>{movie.rating}</h4>
+                        <p>{movie.summary.slice(0,140)}...</p>
+                        <button onClick={()=>findMeInfo()}>See More</button>
                     </div>
                 </MovieData>
             </div>

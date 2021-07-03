@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import "./MovieItems.css"
 
-function MovieItems({movies}){
+function MovieItems({movies, setShowMovieInfo, setMainMovieInfo}){
     const [slideIdx, setSlideIdx] = useState(1) // (1~18까지 괜찮음)
     const moveLeft = () => {
         if(slideIdx===0){
@@ -19,13 +19,16 @@ function MovieItems({movies}){
     }
     const styleChange = () => {
         let moviesListSlide = document.querySelector(".youngflix_movie .moviesListSlide")
-        console.log(moviesListSlide)
         moviesListSlide.style.left = (-slideIdx * 270) + 'px'
     }
-
     useEffect(()=>{
         styleChange()
     },[slideIdx])
+
+    const findMeInfo = (idx) => {
+        setShowMovieInfo(true)
+        setMainMovieInfo(movies[idx])
+    }
 
     return(
         <div className="moviesList">
@@ -35,9 +38,9 @@ function MovieItems({movies}){
             </div>
 
             <div className="moviesListSlide">
-                {movies.map((movie)=>{
+                {movies.map((movie,idx)=>{
                     return (
-                        <div className="moviesList__data">
+                        <div className="moviesList__data" onClick={()=>findMeInfo(idx)}>
                             <img className="moviesList__poster" src={movie.medium_cover_image} alt={movie.title} title={movie.title}></img>
                             <h3 className="moviesList__title">{movie.title}</h3>
                             <h4 className="moviesList__year">{movie.year}</h4>
